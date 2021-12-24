@@ -24,13 +24,13 @@ model Wallet {
   name String
   account_number String
   type WalletType
-  initValue BigInt
+  initValue Int
   user User @relation(fields: [userId], references: [id])
   userId Int 
 transaction Transaction[]
 }
 
-enum WalletType {
+enum WalletType { 
   BANK
   EWALLET
   CONVENTIONAL
@@ -42,7 +42,7 @@ model Transaction {
   type TransactionType
   date DateTime
   category String
-  value BigInt
+  value Int
   detail String?
   user User @relation(fields: [userId], references: [id])
   userId Int 

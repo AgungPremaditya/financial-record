@@ -5,8 +5,8 @@ import { generateToken } from "../helpers/jwt";
 
 const prisma = new PrismaClient();
 
-export default class AdminController {
-  static async get(req: Request, res: Response) {
+export default class UserController {
+  static async get(res: Response) {
     const user = await prisma.user.findMany();
     res.status(200).json(user);
   }
@@ -48,6 +48,7 @@ export default class AdminController {
           res.status(200).json({
             message: `Admin ${user.name} logged in`,
             token: generateToken({
+              id: user.id,
               email: user.email,
               name: user.name,
             }),

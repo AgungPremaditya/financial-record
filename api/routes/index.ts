@@ -1,7 +1,8 @@
 import { Router } from "express";
 import { Request, Response, NextFunction } from "express";
 
-import User from "../controllers/userController";
+import UserController from "../controllers/userController";
+import WalletController from "../controllers/walletController";
 import { authenticate } from "../middleware/auth";
 
 const router = Router();
@@ -12,10 +13,13 @@ router.get("/", (req: Request, res: Response, next: NextFunction) => {
 });
 
 // Auth
-router.post("/auth/register", User.register);
-router.post("/auth/login", User.login);
+router.post("/auth/register", UserController.register);
+router.post("/auth/login", UserController.login);
 
 // User
-router.get("/user", authenticate, User.get);
+router.get("/user", authenticate, UserController.get);
+
+// Wallet
+router.get("/wallet", authenticate, WalletController.get);
 
 export default router;

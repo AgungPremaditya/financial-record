@@ -11,7 +11,8 @@ export const authenticate = (
   if (headers) {
     const token = headers.split(" ")[1];
 
-    jwt.verify(token, secret, () => {
+    jwt.verify(token, secret, (err, user) => {
+      res.locals.user = user;
       next();
     });
   } else {
