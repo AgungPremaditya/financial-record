@@ -21,5 +21,6 @@ router.get("/user", authenticate, UserController.get);
 
 // Wallet
 router.get("/wallet", authenticate, WalletController.get);
+router.post("/wallet/create", authenticate, WalletController.post);
 
 export default router;
