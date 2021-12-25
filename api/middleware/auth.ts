@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import { secret } from "../helpers/jwt";
+import { secret } from "../config/secret";
 
 export const authenticate = (
   req: Request,
@@ -12,6 +12,9 @@ export const authenticate = (
     const token = headers.split(" ")[1];
 
     jwt.verify(token, secret, (err, user) => {
+      if (user === undefined) {
+        res.sendStatus(401);
+      }
       res.locals.user = user;
       next();
     });
