@@ -15,7 +15,7 @@ export const authenticate = (
       if (user === undefined) {
         res.sendStatus(401);
       }
-      res.locals.user = user;
+      res.locals.userData = user;
       next();
     });
   } else {

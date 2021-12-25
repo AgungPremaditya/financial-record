@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 export default class WalletController {
   static async get(req: Request, res: Response) {
-    const user = res.locals.user;
+    const user = res.locals.userData;
 
     const wallet = await prisma.wallet.findMany({
       where: {
@@ -17,7 +17,7 @@ export default class WalletController {
   }
 
   static async post(req: Request, res: Response, next: NextFunction) {
-    const user = res.locals.user;
+    const user = res.locals.userData;
 
     try {
       const { name, accountNumber, type, initValue } = req.body;
@@ -39,7 +39,7 @@ export default class WalletController {
   }
 
   static async show(req: Request, res: Response) {
-    const user = res.locals.user;
+    const user = res.locals.userData;
     const id = req.params.id;
 
     const wallet = await prisma.wallet.findFirst({

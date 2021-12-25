@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { Request, Response, NextFunction } from "express";
+import TransactionController from "../controllers/transactionControllers";
 
 import UserController from "../controllers/userController";
 import WalletController from "../controllers/walletController";
@@ -25,5 +26,9 @@ router.post("/wallet/create", authenticate, WalletController.post);
 router.get("/wallet/:id", authenticate, WalletController.show);
 router.put("/wallet/:id", authenticate, WalletController.update);
 router.delete("/wallet/:id", authenticate, WalletController.delete);
+
+// Transaction
+router.get("/transaction", authenticate, TransactionController.get);
+router.post("/transaction", authenticate, TransactionController.create);
 
 export default router;
