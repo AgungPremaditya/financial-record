@@ -25,7 +25,7 @@ model Wallet {
   accountNumber String
   type WalletType
   initValue Int
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int 
 transaction Transaction[]
 }
@@ -44,9 +44,9 @@ model Transaction {
   category String
   value Int
   detail String?
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int 
-  wallet Wallet @relation(fields: [walletId], references: [id])
+  wallet Wallet @relation(fields: [walletId], references: [id], onDelete: Cascade)
   walletId Int 
 }
 
