@@ -11,6 +11,9 @@ export default class TransactionController {
       where: {
         userId: user.id,
       },
+      orderBy: {
+        date: "desc",
+      },
     });
 
     res.status(200).json(transaction);
@@ -47,7 +50,7 @@ export default class TransactionController {
             id: parseInt(walletId),
           },
           data: {
-            initValue: wallet!.initValue + value,
+            initValue: wallet!.initValue + parseInt(value),
           },
         });
       } else {
@@ -56,7 +59,7 @@ export default class TransactionController {
             id: parseInt(walletId),
           },
           data: {
-            initValue: wallet!.initValue - value,
+            initValue: wallet!.initValue - parseInt(value),
           },
         });
       }
