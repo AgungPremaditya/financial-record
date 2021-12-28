@@ -190,4 +190,55 @@ export default class TransactionController {
       next(error);
     }
   }
+
+  static async delete(req: Request, res: Response, next: NextFunction) {
+    const id = req.params.id;
+
+    // Transaction
+    const initTransaction = await prisma.transaction.findFirst({
+      where: {
+        id: parseInt(id),
+      },
+      include: {
+        wallet: true,
+      },
+    });
+
+    if (initTransaction === null) {
+      res.sendStatus(404);
+    }
+
+    try {
+      // set new value
+      let tmpValue: number = 0;
+      if (initTransaction!.type === "INCOME") {
+        tmpValue = initTransaction!.wallet.initValue - initTransaction!.value;
+      } else {
+        tmpValue = initTransaction!.wallet.initValue + initTransaction!.value;
+      }
+
+      await prisma.wallet.update({
+        data: {
+          initValue: tmpValue,
+        },
+        where: {
+          id: initTransaction!.wallet.id,
+        },
+      });
+    } catch (error) {
+      next(error);
+    }
+
+    try {
+      await prisma.transaction.delete({
+        where: {
+          id: parseInt(id),
+        },
+      });
+
+      res.status(200).json({ message: `Data ${id} deleted` });
+    } catch (error) {
+      next(error);
+    }
+  }
 }

@@ -32,5 +32,6 @@ router.get("/transaction", authenticate, TransactionController.get);
 router.post("/transaction", authenticate, TransactionController.create);
 router.get("/transaction/:id", authenticate, TransactionController.show);
 router.put("/transaction/:id", authenticate, TransactionController.update);
+router.delete("/transaction/:id", authenticate, TransactionController.delete);
 
 export default router;
