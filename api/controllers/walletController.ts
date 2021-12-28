@@ -16,7 +16,7 @@ export default class WalletController {
     res.status(200).json(wallet);
   }
 
-  static async post(req: Request, res: Response, next: NextFunction) {
+  static async create(req: Request, res: Response, next: NextFunction) {
     const user = res.locals.userData;
 
     try {

@@ -22,7 +22,7 @@ router.get("/user", authenticate, UserController.get);
 
 // Wallet
 router.get("/wallet", authenticate, WalletController.get);
-router.post("/wallet/create", authenticate, WalletController.post);
+router.post("/wallet/create", authenticate, WalletController.create);
 router.get("/wallet/:id", authenticate, WalletController.show);
 router.put("/wallet/:id", authenticate, WalletController.update);
 router.delete("/wallet/:id", authenticate, WalletController.delete);
@@ -30,5 +30,7 @@ router.delete("/wallet/:id", authenticate, WalletController.delete);
 // Transaction
 router.get("/transaction", authenticate, TransactionController.get);
 router.post("/transaction", authenticate, TransactionController.create);
+router.get("/transaction/:id", authenticate, TransactionController.show);
+router.put("/transaction/:id", authenticate, TransactionController.update);
 
 export default router;
