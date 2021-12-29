@@ -1,9 +1,11 @@
 import { Router } from "express";
 import { Request, Response, NextFunction } from "express";
-import TransactionController from "../controllers/transactionControllers";
 
+import DasboardController from "../controllers/dashboardController";
+import TransactionController from "../controllers/transactionController";
 import UserController from "../controllers/userController";
 import WalletController from "../controllers/walletController";
+
 import { authenticate } from "../middleware/auth";
 
 const router = Router();
@@ -33,5 +35,8 @@ router.post("/transaction", authenticate, TransactionController.create);
 router.get("/transaction/:id", authenticate, TransactionController.show);
 router.put("/transaction/:id", authenticate, TransactionController.update);
 router.delete("/transaction/:id", authenticate, TransactionController.delete);
+
+// Dashboard
+router.get("/dashboard", authenticate, DasboardController.get);
 
 export default router;
