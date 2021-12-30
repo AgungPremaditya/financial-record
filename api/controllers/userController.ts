@@ -46,7 +46,7 @@ export default class UserController {
       if (user) {
         if (decode(password, user.password)) {
           res.status(200).json({
-            message: `Admin ${user.name} logged in`,
+            message: `${user.name} logged in`,
             token: generateToken({
               id: user.id,
               email: user.email,
@@ -57,7 +57,7 @@ export default class UserController {
           res.status(401).json({ message: "Invalid email or password!" });
         }
       } else {
-        throw { status: 404, message: "Admin not registered" };
+        throw { status: 404, message: "User not registered" };
       }
     } catch (error) {
       next(error);

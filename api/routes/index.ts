@@ -12,7 +12,7 @@ const router = Router();
 
 // Check Status
 router.get("/", (req: Request, res: Response, next: NextFunction) => {
-  res.status(200).json({ message: "Server Connected" });
+  res.status(200).json({ message: "Server Connected!" });
 });
 
 // Auth
