@@ -24,7 +24,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./app.ts"
+    "dev": "nodemon ./app.ts",
+    "start": "ts-node src/index.ts"
   },
   "keywords": [],
   "author": "Schias",
