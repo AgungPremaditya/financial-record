@@ -46,7 +46,7 @@ export default class UserController {
       if (user) {
         if (decode(password, user.password)) {
           res.status(200).json({
-            message: `${user.name} logged in`,
+            user,
             token: generateToken({
               id: user.id,
               email: user.email,

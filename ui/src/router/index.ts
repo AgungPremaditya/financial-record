@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { useAuth, AUTH_KEY } from "../utils/auth";
 
 const routes = [
   {
@@ -16,6 +17,21 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+const { authenticating, user } = useAuth();
+
+router.beforeEach((to, from, next) => {
+  if (to.path === "/login") {
+    if (authenticating.value) next("/");
+    else next();
+  } else {
+    if (authenticating.value) {
+      next();
+    } else {
+      next({ name: "login" });
+    }
+  }
 });
 
 export default router;

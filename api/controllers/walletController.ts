@@ -70,7 +70,7 @@ export default class WalletController {
           name,
           accountNumber,
           type,
-          initValue,
+          initValue: parseInt(initValue),
         },
       });
 

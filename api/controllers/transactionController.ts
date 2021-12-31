@@ -168,12 +168,9 @@ export default class TransactionController {
         newValue = wallet!.initValue - parseInt(value);
       }
 
-      // console.log(newValue);
-
-      let walletTMP = {};
       // update wallet
       try {
-        walletTMP = await prisma.wallet.update({
+        await prisma.wallet.update({
           data: {
             initValue: newValue,
           },
@@ -185,7 +182,7 @@ export default class TransactionController {
         next(error);
       }
 
-      res.status(200).json({ transaction, walletTMP });
+      res.status(200).json(transaction);
     } catch (error) {
       next(error);
     }
