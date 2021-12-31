@@ -130,7 +130,7 @@ export const useApi = (endpoint: string, access_token?: string) => {
 
   api.interceptors.request.use((config) => {
     if (user?.value?.token) {
-      config.headers = { Authorization: `Bearer ${user.value.token.token}` };
+      config.headers = { Authorization: `Bearer ${user.value.token}` };
     }
 
     return config;

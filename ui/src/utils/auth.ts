@@ -4,19 +4,13 @@ import { useApi } from "./api";
 
 export const AUTH_KEY = "auth_token";
 
-interface Token {
-  type: string;
-  token: string;
-  expires_at: string;
-}
-
 interface User {
   user: {
     id: string;
     email: string;
     name: string;
   };
-  token: Token;
+  token: string;
 }
 
 interface AuthState {
@@ -43,8 +37,6 @@ if (token) {
 
 export const useAuth = () => {
   const setUser = (payload: User): void => {
-    console.log(payload);
-
     if (payload) {
       state.authenticating = true;
       localStorage.setItem(AUTH_KEY, JSON.stringify(payload));

@@ -43,7 +43,7 @@ const loginFormSchema = yup.object().shape({
 export default defineComponent({
   setup() {
     const { loading, data, post } = useApi("auth/login");
-    const { setUser, authenticating, user } = useAuth();
+    const { setUser } = useAuth();
     const router = useRouter();
 
     const payload = ref({
