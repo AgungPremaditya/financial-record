@@ -3,30 +3,52 @@
     <h1><center>Loading...</center></h1>
   </div>
   <div>
-    <h1>Income</h1>
-    <LineChart
-      :chart-data="{
-        labels: incomeChartDate,
-        datasets: [
-          {
-            data: incomeChartData,
-            backgroundColor: '#0079AF',
-          },
-        ],
-      }"
-    ></LineChart>
-    <h1>Expense</h1>
-    <LineChart
-      :chart-data="{
-        labels: expenseChartDate,
-        datasets: [
-          {
-            data: expenseChartData,
-            backgroundColor: '#0079AF',
-          },
-        ],
-      }"
-    ></LineChart>
+    <div class="row m-0 mt-4">
+      <div class="col-1"></div>
+      <div class="col-10">
+        <div class="card">
+          <div class="card-header">Chart</div>
+          <div class="card-body">
+            <h5 class="card-title">Income</h5>
+            <LineChart
+              :chart-data="{
+                labels: incomeChartDate,
+                datasets: [
+                  {
+                    data: incomeChartData,
+                    backgroundColor: '#2637d9',
+                    borderColor: '#9fefef',
+                  },
+                ],
+              }"
+            ></LineChart>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row m-0 mt-4 mb-4">
+      <div class="col-1"></div>
+      <div class="col-10">
+        <div class="card">
+          <div class="card-header">Chart</div>
+          <div class="card-body">
+            <h5 class="card-title">Expense</h5>
+            <LineChart
+              :chart-data="{
+                labels: expenseChartDate,
+                datasets: [
+                  {
+                    data: expenseChartData,
+                    backgroundColor: '#2637d9',
+                    borderColor: '#9fefef',
+                  },
+                ],
+              }"
+            ></LineChart>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

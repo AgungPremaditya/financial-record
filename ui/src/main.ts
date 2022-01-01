@@ -1,5 +1,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
+
+// Import Chart
 import {
   Chart,
   LineController,
@@ -10,9 +12,7 @@ import {
   Tooltip,
 } from "chart.js";
 
-// Import Router
-import router from "./router";
-
+// Register Chart
 Chart.register(
   LineController,
   LineElement,
@@ -21,5 +21,12 @@ Chart.register(
   LinearScale,
   Tooltip
 );
+
+// Import Router
+import router from "./router";
+
+// Import Bootstrap
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap";
 
 createApp(App).use(router).mount("#app");
