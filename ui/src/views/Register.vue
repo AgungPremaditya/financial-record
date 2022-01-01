@@ -1,14 +1,19 @@
 <template>
   <link rel="stylesheet" href="./style/Login.css" scoped />
   <div class="center">
-    <h1>Sign In</h1>
-    <form @submit.prevent="submit" :validation-schema="loginFormSchema">
-      <div class="txt_field">
+    <h1>Sign Up</h1>
+    <form @submit.prevent="submit" :validation-schema="registerFormSchema">
+      <div class="txt_field" style="margin-bottom: 2em">
+        <input type="text" v-model="payload.name" required />
+        <span></span>
+        <label>Name</label>
+      </div>
+      <div class="txt_field" style="margin-bottom: 2em">
         <input type="text" v-model="payload.email" required />
         <span></span>
         <label>Email</label>
       </div>
-      <div class="txt_field" style="margin-bottom: 1em">
+      <div class="txt_field" style="margin-bottom: 2em">
         <input type="password" v-model="payload.password" required />
         <span></span>
         <label>Password</label>
@@ -18,7 +23,7 @@
       </div>
       <button type="submit" class="btnInput" :disabled="loading">Login</button>
       <div class="signup_link">
-        Not a member? <router-link to="/register">Signup</router-link>
+        Not a member? <router-link to="/login">Sign In</router-link>
       </div>
       <span v-if="loading"> Loading</span>
     </form>
@@ -34,7 +39,8 @@ import { useApi } from "../utils/api";
 import { useAuth } from "../utils/auth";
 
 // Login Schema Validation
-const loginFormSchema = yup.object().shape({
+const registerFormSchema = yup.object().shape({
+  name: yup.string().required("Name is required"),
   email: yup.string().required("Email is required").email("Email is invalid"),
   password: yup
     .string()
@@ -44,11 +50,11 @@ const loginFormSchema = yup.object().shape({
 
 export default defineComponent({
   setup() {
-    const { loading, data, post } = useApi("auth/login");
-    const { setUser } = useAuth();
+    const { loading, data, post } = useApi("auth/register");
     const router = useRouter();
 
     const payload = ref({
+      name: "",
       email: "",
       password: "",
     });
@@ -56,7 +62,7 @@ export default defineComponent({
     const errors = ref();
 
     const submit = () => {
-      loginFormSchema
+      registerFormSchema
         .validate(payload.value)
         .then(() => errors.value)
         .catch((err) => {
@@ -66,16 +72,12 @@ export default defineComponent({
       post(payload.value).then(() => {
         console.log(data.value);
 
-        setUser(data.value);
-        if (!data.value) {
-          errors.value = "Email or Password is wrong";
-        }
-        router.replace({ name: "home" });
+        router.push({ name: "login" });
       });
     };
 
     return {
-      loginFormSchema,
+      registerFormSchema,
       payload,
       errors,
       loading,
