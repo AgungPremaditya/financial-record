@@ -9,10 +9,10 @@ export default class DasboardController {
 
     const date = new Date();
 
-    let firstDay = new Date(date.getFullYear(), date.getMonth(), 1 + 1)
+    let firstDay = new Date(date.getFullYear(), date.getMonth(), 1)
       .toISOString()
       .split("T")[0];
-    let lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1)
+    let lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0)
       .toISOString()
       .split("T")[0];
 

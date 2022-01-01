@@ -6,10 +6,22 @@
     <h1>Income</h1>
     <LineChart
       :chart-data="{
-        labels: chartDate,
+        labels: incomeChartDate,
         datasets: [
           {
-            data: chartData,
+            data: incomeChartData,
+            backgroundColor: '#0079AF',
+          },
+        ],
+      }"
+    ></LineChart>
+    <h1>Expense</h1>
+    <LineChart
+      :chart-data="{
+        labels: expenseChartDate,
+        datasets: [
+          {
+            data: expenseChartData,
             backgroundColor: '#0079AF',
           },
         ],
@@ -19,7 +31,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeMount, ref, computed } from "vue";
+import { defineComponent, onBeforeMount, ref, computed, onMounted } from "vue";
 import { LineChart } from "vue-chart-3";
 import { date, string } from "yup/lib/locale";
 
@@ -33,7 +45,7 @@ export default defineComponent({
 
     get();
 
-    const chartDate = computed(() => {
+    const incomeChartDate = computed(() => {
       let dateArray: string[] = [];
       data.value.income.forEach((element: { date: string }) => {
         dateArray.push(new Date(element.date).toLocaleDateString());
@@ -42,19 +54,40 @@ export default defineComponent({
       return dateArray;
     });
 
-    const chartData = computed(() => {
-      let dateArray: number[] = [];
-      data.value.income.forEach((element: { _sum: { value: number } }) => {
-        dateArray.push(element._sum.value);
+    const incomeChartData = computed(() => {
+      let dataArray: number[] = [];
+      data.value.income.forEach((element: { total: number }) => {
+        dataArray.push(element.total);
+      });
+
+      return dataArray;
+    });
+
+    const expenseChartDate = computed(() => {
+      let dateArray: string[] = [];
+      data.value.expense.forEach((element: { date: string }) => {
+        dateArray.push(new Date(element.date).toLocaleDateString());
       });
 
       return dateArray;
     });
 
+    const expenseChartData = computed(() => {
+      let dataArray: number[] = [];
+      data.value.expense.forEach((element: { total: number }) => {
+        dataArray.push(element.total);
+      });
+
+      return dataArray;
+    });
+
     return {
       loading,
-      chartDate,
-      chartData,
+      incomeChartDate,
+      incomeChartData,
+      expenseChartDate,
+      expenseChartData,
+      data,
     };
   },
 });
