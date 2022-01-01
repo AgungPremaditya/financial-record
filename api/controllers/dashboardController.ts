@@ -7,6 +7,8 @@ export default class DasboardController {
   static async get(req: Request, res: Response) {
     const user = res.locals.userData;
 
+    console.log(user.id);
+
     const date = new Date();
 
     let firstDay = new Date(date.getFullYear(), date.getMonth(), 1)
@@ -27,6 +29,7 @@ export default class DasboardController {
         "type" = 'INCOME'
         and "date" >= to_timestamp(${firstDay}, 'YYYY-MM-DD HH:MI:SS')
         and "date" <= to_timestamp(${lastDay}, 'YYYY-MM-DD HH:MI:SS')
+        and "userId" = ${user.id}
       group by
         "date"
       order by
@@ -41,6 +44,7 @@ export default class DasboardController {
         "type" = 'EXPENSE'
         and "date" >= to_timestamp(${firstDay}, 'YYYY-MM-DD HH:MI:SS')
         and "date" <= to_timestamp(${lastDay}, 'YYYY-MM-DD HH:MI:SS')
+        and "userId" = ${user.id}
       group by
         "date"
       order by
