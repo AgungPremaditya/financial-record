@@ -99,7 +99,7 @@
 
 <script lang="ts">
 import { defineComponent, computed, ref, watch } from "vue";
-import { useApi } from "../utils/api";
+import { useApi } from "../../utils/api";
 
 export default defineComponent({
   setup() {

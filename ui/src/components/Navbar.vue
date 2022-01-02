@@ -24,7 +24,7 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/">Wallet</router-link>
+            <router-link class="nav-link" to="/wallet">Wallet</router-link>
           </li>
         </ul>
       </div>

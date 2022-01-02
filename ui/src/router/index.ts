@@ -20,7 +20,12 @@ const routes = [
   {
     path: "/transaction",
     name: "transaction",
-    component: import("../views/Transaction.vue"),
+    component: import("../views/Transaction/Index.vue"),
+  },
+  {
+    path: "/wallet",
+    name: "wallet",
+    component: import("../views/Wallet/Index.vue"),
   },
 ];
 
