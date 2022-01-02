@@ -7,21 +7,14 @@ export default class TransactionController {
   static async get(req: Request, res: Response) {
     const user = res.locals.userData;
 
-    const date = new Date();
-
-    let firstDay = new Date(date.getFullYear(), date.getMonth(), 1)
-      .toISOString()
-      .split("T")[0];
-    let lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0)
-      .toISOString()
-      .split("T")[0];
-
-    const transaction = await prisma.$queryRaw`select * from "Transaction"
-    where "date" >= to_timestamp(${firstDay}, 'YYYY-MM-DD HH:MI:SS')
-          and "date" <= to_timestamp(${lastDay}, 'YYYY-MM-DD HH:MI:SS')
-          and "userId" = ${user.id}
-    order by
-          "date" desc ;`;
+    const transaction = await prisma.transaction.findMany({
+      where: {
+        userId: user.id,
+      },
+      orderBy: {
+        date: "desc",
+      },
+    });
 
     res.status(200).json(transaction);
   }

@@ -17,28 +17,25 @@
           </div>
           <div v-if="loading"><h2>LOADING</h2></div>
           <div class="row my-4">
-            <div class="col-2">
+            <div class="col-3">
               <input
                 type="text"
                 class="form-control"
                 placeholder="Start Date Filter"
                 onfocus="(this.type='date')"
+                v-model="payload.startDate"
               />
             </div>
-            <div class="col-2">
+            <div class="col-3">
               <input
                 type="text"
                 class="form-control"
                 placeholder="End Date Filter"
                 onfocus="(this.type='date')"
+                v-model="payload.endDate"
               />
             </div>
-            <div class="col-1">
-              <button class="btn btn-outline-primary" type="button">
-                Apply
-              </button>
-            </div>
-            <div class="col-3"></div>
+            <div class="col-2"></div>
             <div class="col-4">
               <div class="input-group">
                 <input
@@ -62,7 +59,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="transaction in data">
+              <tr v-for="transaction in item">
                 <td>
                   <div class="fw-bolder text-primary">
                     <router-link to="/"> {{ transaction.name }} </router-link>
@@ -103,14 +100,41 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent, computed, ref, watch } from "vue";
 import { useApi } from "../utils/api";
 
 export default defineComponent({
   setup() {
     const { loading, data, get } = useApi("transaction");
 
+    const date = new Date();
+
+    let firstDay = new Date(date.getFullYear(), date.getMonth(), 2)
+      .toISOString()
+      .split("T")[0];
+    let lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1)
+      .toISOString()
+      .split("T")[0];
+
+    console.log(firstDay, lastDay);
+
+    const payload = ref({
+      startDate: firstDay,
+      endDate: lastDay,
+    });
+
     get();
+
+    const item = computed(() => {
+      return data.value.filter((transaction: { date: string }) => {
+        return (
+          new Date(transaction.date).toISOString().split("T")[0] >=
+            payload.value.startDate &&
+          new Date(transaction.date).toISOString().split("T")[0] <=
+            payload.value.endDate
+        );
+      });
+    });
 
     const currencyFormatter = new Intl.NumberFormat("id-ID", {
       style: "currency",
@@ -121,6 +145,8 @@ export default defineComponent({
       loading,
       data,
       currencyFormatter,
+      payload,
+      item,
     };
   },
 });
