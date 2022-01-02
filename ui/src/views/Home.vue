@@ -53,12 +53,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeMount, ref, computed, onMounted } from "vue";
+import { defineComponent, computed } from "vue";
 import { LineChart } from "vue-chart-3";
-import { date, string } from "yup/lib/locale";
-
 import { useApi } from "../utils/api";
-import { useAuth } from "../utils/auth";
 
 export default defineComponent({
   components: { LineChart },
