@@ -5,8 +5,53 @@
       <div class="card">
         <div class="card-header">Data Table</div>
         <div class="card-body">
-          <h3 class="card-title">Income</h3>
+          <div class="row mb-4">
+            <div class="col-9">
+              <h3 class="card-title">Income</h3>
+            </div>
+            <div class="col-3 d-flex justify-content-end">
+              <button class="btn btn-primary" type="button">
+                + Add New Record
+              </button>
+            </div>
+          </div>
           <div v-if="loading"><h2>LOADING</h2></div>
+          <div class="row my-4">
+            <div class="col-2">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Start Date Filter"
+                onfocus="(this.type='date')"
+              />
+            </div>
+            <div class="col-2">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="End Date Filter"
+                onfocus="(this.type='date')"
+              />
+            </div>
+            <div class="col-1">
+              <button class="btn btn-outline-primary" type="button">
+                Apply
+              </button>
+            </div>
+            <div class="col-3"></div>
+            <div class="col-4">
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Search..."
+                />
+                <button class="btn btn-outline-primary" type="button">
+                  Search
+                </button>
+              </div>
+            </div>
+          </div>
           <table class="table">
             <thead>
               <tr>
