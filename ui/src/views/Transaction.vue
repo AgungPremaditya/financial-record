@@ -123,16 +123,6 @@ export default defineComponent({
 
     get();
 
-    const searchQuery = ref("");
-
-    const searchedItem = computed(() => {
-      return data.value.filter((item: { name: string }) => {
-        return (
-          item.name.toLowerCase().indexOf(searchQuery.value.toLowerCase()) != -1
-        );
-      });
-    });
-
     const item = computed(() => {
       return data.value.filter((transaction: { date: string }) => {
         return (
@@ -140,6 +130,16 @@ export default defineComponent({
             payload.value.startDate &&
           new Date(transaction.date).toISOString().split("T")[0] <=
             payload.value.endDate
+        );
+      });
+    });
+
+    const searchQuery = ref("");
+
+    const searchedItem = computed(() => {
+      return item.value.filter((item: { name: string }) => {
+        return (
+          item.name.toLowerCase().indexOf(searchQuery.value.toLowerCase()) != -1
         );
       });
     });
