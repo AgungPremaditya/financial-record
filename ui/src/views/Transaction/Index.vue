@@ -7,7 +7,7 @@
         <div class="card-body">
           <div class="row mb-4">
             <div class="col-9">
-              <h3 class="card-title">Income</h3>
+              <h3 class="card-title">Transaction</h3>
             </div>
             <div class="col-3 d-flex justify-content-end">
               <button class="btn btn-primary" type="button">

@@ -9,7 +9,7 @@
         <div class="card">
           <div class="card-header">Chart</div>
           <div class="card-body">
-            <h5 class="card-title">Income</h5>
+            <h3 class="card-title mb-4">Income</h3>
             <LineChart
               :chart-data="{
                 labels: incomeChartDate,
@@ -17,7 +17,7 @@
                   {
                     data: incomeChartData,
                     backgroundColor: '#2637d9',
-                    borderColor: '#9fefef',
+                    borderColor: '#e9ebfb',
                   },
                 ],
               }"
@@ -32,15 +32,15 @@
         <div class="card">
           <div class="card-header">Chart</div>
           <div class="card-body">
-            <h5 class="card-title">Expense</h5>
+            <h3 class="card-title mb-4">Expense</h3>
             <LineChart
               :chart-data="{
                 labels: expenseChartDate,
                 datasets: [
                   {
                     data: expenseChartData,
-                    backgroundColor: '#2637d9',
-                    borderColor: '#9fefef',
+                    backgroundColor: '#800000',
+                    borderColor: '#ffe8e8',
                   },
                 ],
               }"
