@@ -37,16 +37,12 @@
             </div>
             <div class="col-2"></div>
             <div class="col-4">
-              <div class="input-group">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Search..."
-                />
-                <button class="btn btn-outline-primary" type="button">
-                  Search
-                </button>
-              </div>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search..."
+                v-model="searchQuery"
+              />
             </div>
           </div>
           <table class="table">
@@ -59,7 +55,9 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="transaction in item">
+              <tr
+                v-for="transaction in searchQuery !== '' ? searchedItem : item"
+              >
                 <td>
                   <div class="fw-bolder text-primary">
                     <router-link to="/"> {{ transaction.name }} </router-link>
@@ -125,6 +123,16 @@ export default defineComponent({
 
     get();
 
+    const searchQuery = ref("");
+
+    const searchedItem = computed(() => {
+      return data.value.filter((item: { name: string }) => {
+        return (
+          item.name.toLowerCase().indexOf(searchQuery.value.toLowerCase()) != -1
+        );
+      });
+    });
+
     const item = computed(() => {
       return data.value.filter((transaction: { date: string }) => {
         return (
@@ -143,10 +151,11 @@ export default defineComponent({
 
     return {
       loading,
-      data,
       currencyFormatter,
       payload,
       item,
+      searchQuery,
+      searchedItem,
     };
   },
 });
