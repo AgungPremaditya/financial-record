@@ -23,6 +23,11 @@ const routes = [
     component: import("../views/Transaction/Index.vue"),
   },
   {
+    path: "/transaction/create",
+    name: "transactionCreate",
+    component: import("../views/Transaction/Create.vue"),
+  },
+  {
     path: "/wallet",
     name: "wallet",
     component: import("../views/Wallet/Index.vue"),
