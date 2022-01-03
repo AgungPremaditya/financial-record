@@ -10,9 +10,11 @@
               <h3 class="card-title">Transaction</h3>
             </div>
             <div class="col-3 d-flex justify-content-end">
-              <button class="btn btn-primary" type="button">
-                + Add New Record
-              </button>
+              <router-link to="/transaction/create">
+                <button class="btn btn-primary" type="button">
+                  + Add New Record
+                </button>
+              </router-link>
             </div>
           </div>
           <div v-if="loading"><h2>LOADING</h2></div>

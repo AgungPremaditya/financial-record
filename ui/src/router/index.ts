@@ -32,6 +32,11 @@ const routes = [
     name: "wallet",
     component: import("../views/Wallet/Index.vue"),
   },
+  {
+    path: "/wallet/create",
+    name: "walletCreate",
+    component: import("../views/Wallet/Create.vue"),
+  },
 ];
 
 const router = createRouter({
