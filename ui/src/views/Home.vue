@@ -1,6 +1,6 @@
 <template>
   <Loading v-if="loading"></Loading>
-  <div>
+  <div v-if="!loading">
     <div class="row m-0 mt-4">
       <div class="col-1"></div>
       <div class="col-10">

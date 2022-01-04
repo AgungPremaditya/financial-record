@@ -1,6 +1,6 @@
 <template>
   <Loading v-if="loading"></Loading>
-  <div class="row m-0 mt-4">
+  <div v-if="!loading" class="row m-0 mt-4">
     <div class="col-1"></div>
     <div class="col-10">
       <div class="card">
@@ -63,7 +63,14 @@
               >
                 <td>
                   <div class="fw-bolder text-primary">
-                    <router-link to="/"> {{ transaction.name }} </router-link>
+                    <router-link
+                      :to="{
+                        name: 'transactionShow',
+                        params: { id: transaction.id },
+                      }"
+                    >
+                      {{ transaction.name }}
+                    </router-link>
                   </div>
                   <div class="text-muted">{{ transaction.category }}</div>
                   <div class="text-muted">

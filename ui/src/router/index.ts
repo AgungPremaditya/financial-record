@@ -28,6 +28,11 @@ const routes = [
     component: import("../views/Transaction/Create.vue"),
   },
   {
+    path: "/transaction/:id",
+    name: "transactionShow",
+    component: import("../views/Transaction/Show.vue"),
+  },
+  {
     path: "/wallet",
     name: "wallet",
     component: import("../views/Wallet/Index.vue"),
@@ -36,6 +41,11 @@ const routes = [
     path: "/wallet/create",
     name: "walletCreate",
     component: import("../views/Wallet/Create.vue"),
+  },
+  {
+    path: "/wallet/:id",
+    name: "walletShow",
+    component: import("../views/Wallet/Show.vue"),
   },
 ];
 
