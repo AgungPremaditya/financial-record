@@ -13,8 +13,8 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <router-link class="nav-link" to="/">Home</router-link>
           </li>
@@ -27,8 +27,41 @@
             <router-link class="nav-link" to="/wallet">Wallet</router-link>
           </li>
         </ul>
+        <div class="nav-item me-4">
+          <button
+            type="button"
+            @click="signOut()"
+            class="btn"
+            :disabled="loading"
+          >
+            Logout
+          </button>
+        </div>
       </div>
     </div>
   </nav>
 </template>
-<script setup lang="ts"></script>
+<script lang="ts">
+import { defineComponent } from "vue";
+import { useRouter } from "vue-router";
+import { useApi } from "../utils/api";
+import { useAuth } from "../utils/auth";
+export default defineComponent({
+  setup() {
+    const { user, logout } = useAuth();
+    const { post, loading } = useApi("auth/logout");
+    const router = useRouter();
+    const signOut = () => {
+      post()
+        .then(() => {
+          router.replace("/login");
+          logout();
+        })
+        .catch(() => {
+          loading.value = false;
+        });
+    };
+    return { user, signOut, loading };
+  },
+});
+</script>
