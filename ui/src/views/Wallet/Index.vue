@@ -1,4 +1,5 @@
 <template>
+  <Loading v-if="loading"></Loading>
   <div class="row m-0 mt-4">
     <div class="col-1"></div>
     <div class="col-10">
@@ -68,15 +69,13 @@
 <script lang="ts">
 import { defineComponent, computed, ref, watch } from "vue";
 import { useApi } from "../../utils/api";
+import Loading from "../../components/Loading.vue";
 
 export default defineComponent({
   setup() {
     const { loading, data, get } = useApi("wallet");
-
     get();
-
     const searchQuery = ref("");
-
     const searchedItem = computed(() => {
       return data.value.filter((item: { name: string }) => {
         return (
@@ -84,12 +83,10 @@ export default defineComponent({
         );
       });
     });
-
     const currencyFormatter = new Intl.NumberFormat("id-ID", {
       style: "currency",
       currency: "IDR",
     });
-
     return {
       loading,
       currencyFormatter,
@@ -97,5 +94,6 @@ export default defineComponent({
       searchedItem,
     };
   },
+  components: { Loading },
 });
 </script>

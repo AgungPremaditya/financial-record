@@ -1,7 +1,5 @@
 <template>
-  <div v-if="loading">
-    <h1><center>Loading...</center></h1>
-  </div>
+  <Loading v-if="loading"></Loading>
   <div>
     <div class="row m-0 mt-4">
       <div class="col-1"></div>
@@ -56,11 +54,14 @@
 import { defineComponent, computed } from "vue";
 import { LineChart } from "vue-chart-3";
 import { useApi } from "../utils/api";
+import Loading from "../components/Loading.vue";
 
 export default defineComponent({
-  components: { LineChart },
+  components: { LineChart, Loading },
   setup() {
     const { loading, data, get } = useApi("dashboard");
+
+    console.log(loading.value);
 
     get();
 
@@ -106,7 +107,6 @@ export default defineComponent({
       incomeChartData,
       expenseChartDate,
       expenseChartData,
-      data,
     };
   },
 });

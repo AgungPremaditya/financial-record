@@ -19,7 +19,6 @@ export const useApi = (endpoint: string, access_token?: string) => {
   const data = ref();
   const loading = ref(false);
   const error = ref();
-  const status = ref();
 
   // Post
   const post = async (payload?: Record<string, any>) => {

@@ -20,7 +20,6 @@
       <div class="signup_link">
         Not a member? <router-link to="/register">Signup</router-link>
       </div>
-      <span v-if="loading"> Loading</span>
     </form>
   </div>
 </template>

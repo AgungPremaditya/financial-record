@@ -1,4 +1,5 @@
 <template>
+  <Loading v-if="loading"></Loading>
   <div class="row m-0 mt-4">
     <div class="col-1"></div>
     <div class="col-10">
@@ -102,29 +103,24 @@
 <script lang="ts">
 import { defineComponent, computed, ref, watch } from "vue";
 import { useApi } from "../../utils/api";
+import Loading from "../../components/Loading.vue";
 
 export default defineComponent({
   setup() {
     const { loading, data, get } = useApi("transaction");
-
     const date = new Date();
-
     let firstDay = new Date(date.getFullYear(), date.getMonth(), 2)
       .toISOString()
       .split("T")[0];
     let lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1)
       .toISOString()
       .split("T")[0];
-
     console.log(firstDay, lastDay);
-
     const payload = ref({
       startDate: firstDay,
       endDate: lastDay,
     });
-
     get();
-
     const item = computed(() => {
       return data.value.filter((transaction: { date: string }) => {
         return (
@@ -135,9 +131,7 @@ export default defineComponent({
         );
       });
     });
-
     const searchQuery = ref("");
-
     const searchedItem = computed(() => {
       return item.value.filter((item: { name: string }) => {
         return (
@@ -145,12 +139,10 @@ export default defineComponent({
         );
       });
     });
-
     const currencyFormatter = new Intl.NumberFormat("id-ID", {
       style: "currency",
       currency: "IDR",
     });
-
     return {
       loading,
       currencyFormatter,
@@ -160,5 +152,6 @@ export default defineComponent({
       searchedItem,
     };
   },
+  components: { Loading },
 });
 </script>
