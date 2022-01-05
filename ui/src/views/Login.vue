@@ -1,5 +1,4 @@
 <template>
-  <link rel="stylesheet" href="./style/Login.css" scoped />
   <div class="background" v-if="loading">
     <Loading></Loading>
   </div>
