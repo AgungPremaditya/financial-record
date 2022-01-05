@@ -1,34 +1,37 @@
 <template>
-  <link rel="stylesheet" href="./style/Login.css" scoped />
-  <div class="background" v-if="loading">
-    <Loading></Loading>
-  </div>
-  <div class="center" :style="loading ? 'z-index: -99' : 'z-index: 0'">
-    <h1>Sign Up</h1>
-    <form @submit.prevent="submit" :validation-schema="registerFormSchema">
-      <div class="txt_field" style="margin-bottom: 2em">
-        <input type="text" v-model="payload.name" required />
-        <span></span>
-        <label>Name</label>
-      </div>
-      <div class="txt_field" style="margin-bottom: 2em">
-        <input type="text" v-model="payload.email" required />
-        <span></span>
-        <label>Email</label>
-      </div>
-      <div class="txt_field" style="margin-bottom: 2em">
-        <input type="password" v-model="payload.password" required />
-        <span></span>
-        <label>Password</label>
-      </div>
-      <div class="error_text" style="margin-bottom: 2em" v-if="errors">
-        {{ errors }}
-      </div>
-      <button type="submit" class="btnInput" :disabled="loading">Login</button>
-      <div class="signup_link">
-        Not a member? <router-link to="/login">Sign In</router-link>
-      </div>
-    </form>
+  <div>
+    <div class="background" v-if="loading">
+      <Loading></Loading>
+    </div>
+    <div class="center" :style="loading ? 'z-index: -99' : 'z-index: 0'">
+      <h1>Sign Up</h1>
+      <form @submit.prevent="submit" :validation-schema="registerFormSchema">
+        <div class="txt_field" style="margin-bottom: 2em">
+          <input type="text" v-model="payload.name" required />
+          <span></span>
+          <label>Name</label>
+        </div>
+        <div class="txt_field" style="margin-bottom: 2em">
+          <input type="text" v-model="payload.email" required />
+          <span></span>
+          <label>Email</label>
+        </div>
+        <div class="txt_field" style="margin-bottom: 2em">
+          <input type="password" v-model="payload.password" required />
+          <span></span>
+          <label>Password</label>
+        </div>
+        <div class="error_text" style="margin-bottom: 2em" v-if="errors">
+          {{ errors }}
+        </div>
+        <button type="submit" class="btnInput" :disabled="loading">
+          Login
+        </button>
+        <div class="signup_link">
+          Not a member? <router-link to="/login">Sign In</router-link>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
