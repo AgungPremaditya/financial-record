@@ -58,10 +58,10 @@
                 </td>
                 <td>
                   <button type="button" class="btn btn-danger btn-sm">
-                    Delete
+                    <FontAwesomeIcon icon="trash-alt"></FontAwesomeIcon>
                   </button>
                   <button type="button" class="btn btn-primary btn-sm ms-4">
-                    Edit
+                    <FontAwesomeIcon icon="edit"></FontAwesomeIcon>
                   </button>
                 </td>
               </tr>
@@ -76,7 +76,14 @@
 <script lang="ts">
 import { defineComponent, computed, ref, watch } from "vue";
 import { useApi } from "../../utils/api";
+
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
 import Loading from "../../components/Loading.vue";
+
+library.add(faTrashAlt, faEdit);
 
 export default defineComponent({
   setup() {
@@ -101,6 +108,6 @@ export default defineComponent({
       searchedItem,
     };
   },
-  components: { Loading },
+  components: { FontAwesomeIcon, Loading },
 });
 </script>
