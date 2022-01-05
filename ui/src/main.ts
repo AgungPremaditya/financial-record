@@ -1,6 +1,8 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 
+import "../style/Login.css";
+
 // Import Chart
 import {
   Chart,

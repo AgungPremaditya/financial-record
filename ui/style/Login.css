@@ -8,9 +8,8 @@
 body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(120deg, #2980b9, #8e44ad);
+  background: linear-gradient(120deg, #2980b9, #8e44ad) no-repeat fixed center;
   height: 100vh;
-  overflow: hidden;
 }
 .center {
   position: absolute;
