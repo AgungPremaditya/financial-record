@@ -64,7 +64,7 @@ router.beforeEach((to, from, next) => {
     if (authenticating.value) {
       next();
     } else {
-      next({ name: "login" });
+      next("/login");
     }
   }
 });
