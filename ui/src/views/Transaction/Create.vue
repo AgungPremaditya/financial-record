@@ -1,5 +1,6 @@
 <template>
-  <div class="row m-0 mt-4">
+  <Loading v-if="loading"></Loading>
+  <div class="row m-0 mt-4" v-if="!loading">
     <div class="col-2"></div>
     <div class="col-8">
       <div class="card">
@@ -9,6 +10,10 @@
 
           <div class="alert alert-danger" role="alert" v-if="errors">
             {{ errors }}
+          </div>
+
+          <div class="alert alert-danger" role="alert" v-if="data.length === 0">
+            You don't have any wallet, please add wallet first
           </div>
           <form
             @submit.prevent="submit"
@@ -82,7 +87,11 @@
                 rows="7"
               ></textarea>
             </div>
-            <button type="submit" class="btn btn-primary" :disabled="loading">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              :disabled="loading || data.length === 0"
+            >
               Submit
             </button>
           </form>
@@ -92,10 +101,11 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, watchEffect } from "vue";
 import { useApi } from "../../utils/api";
 import { useRouter } from "vue-router";
 import * as yup from "yup";
+import Loading from "../../components/Loading.vue";
 
 // Login Schema Validation
 const transactionInputSchema = yup.object().shape({
@@ -119,14 +129,10 @@ export default defineComponent({
       walletId: 0,
     });
     const router = useRouter();
-
     const errors = ref();
-
     const { loading, data, get } = useApi("wallet");
     get();
-
     const { post } = useApi("transaction");
-
     const submit = () => {
       transactionInputSchema
         .validate(payload.value)
@@ -134,14 +140,12 @@ export default defineComponent({
         .catch((err) => {
           errors.value = err.message;
         });
-
       post(payload.value)
         .then(() => {
           router.push({ name: "transaction" });
         })
         .finally(() => (loading.value = false));
     };
-
     return {
       transactionInputSchema,
       errors,
@@ -151,6 +155,7 @@ export default defineComponent({
       submit,
     };
   },
+  components: { Loading },
 });
 </script>
 <style></style>

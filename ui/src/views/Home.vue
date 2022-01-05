@@ -61,8 +61,6 @@ export default defineComponent({
   setup() {
     const { loading, data, get } = useApi("dashboard");
 
-    console.log(loading.value);
-
     get();
 
     const incomeChartDate = computed(() => {

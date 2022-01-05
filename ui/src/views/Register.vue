@@ -1,6 +1,9 @@
 <template>
   <link rel="stylesheet" href="./style/Login.css" scoped />
-  <div class="center">
+  <div class="background" v-if="loading">
+    <Loading></Loading>
+  </div>
+  <div class="center" :style="loading ? 'z-index: -99' : 'z-index: 0'">
     <h1>Sign Up</h1>
     <form @submit.prevent="submit" :validation-schema="registerFormSchema">
       <div class="txt_field" style="margin-bottom: 2em">
@@ -25,7 +28,6 @@
       <div class="signup_link">
         Not a member? <router-link to="/login">Sign In</router-link>
       </div>
-      <span v-if="loading"> Loading</span>
     </form>
   </div>
 </template>
@@ -37,6 +39,7 @@ import * as yup from "yup";
 
 import { useApi } from "../utils/api";
 import { useAuth } from "../utils/auth";
+import Loading from "../components/Loading.vue";
 
 // Login Schema Validation
 const registerFormSchema = yup.object().shape({
@@ -52,15 +55,12 @@ export default defineComponent({
   setup() {
     const { loading, data, post } = useApi("auth/register");
     const router = useRouter();
-
     const payload = ref({
       name: "",
       email: "",
       password: "",
     });
-
     const errors = ref();
-
     const submit = () => {
       registerFormSchema
         .validate(payload.value)
@@ -68,14 +68,11 @@ export default defineComponent({
         .catch((err) => {
           errors.value = err.message;
         });
-
       post(payload.value).then(() => {
         console.log(data.value);
-
         router.push({ name: "login" });
       });
     };
-
     return {
       registerFormSchema,
       payload,
@@ -84,5 +81,6 @@ export default defineComponent({
       submit,
     };
   },
+  components: { Loading },
 });
 </script>

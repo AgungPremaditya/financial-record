@@ -1,6 +1,9 @@
 <template>
   <link rel="stylesheet" href="./style/Login.css" scoped />
-  <div class="center">
+  <div class="background" v-if="loading">
+    <Loading></Loading>
+  </div>
+  <div class="center" :style="loading ? 'z-index: -99' : 'z-index: 0'">
     <h1>Sign In</h1>
     <form @submit.prevent="submit" :validation-schema="loginFormSchema">
       <div class="txt_field">
@@ -24,6 +27,15 @@
   </div>
 </template>
 
+<style>
+.background {
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100vh;
+  z-index: 99;
+}
+</style>
+
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
@@ -31,6 +43,7 @@ import * as yup from "yup";
 
 import { useApi } from "../utils/api";
 import { useAuth } from "../utils/auth";
+import Loading from "../components/Loading.vue";
 
 // Login Schema Validation
 const loginFormSchema = yup.object().shape({
@@ -46,14 +59,11 @@ export default defineComponent({
     const { loading, data, post } = useApi("auth/login");
     const { setUser } = useAuth();
     const router = useRouter();
-
     const payload = ref({
       email: "",
       password: "",
     });
-
     const errors = ref();
-
     const submit = () => {
       loginFormSchema
         .validate(payload.value)
@@ -61,10 +71,7 @@ export default defineComponent({
         .catch((err) => {
           errors.value = err.message;
         });
-
       post(payload.value).then(() => {
-        console.log(data.value);
-
         setUser(data.value);
         if (!data.value) {
           errors.value = "Email or Password is wrong";
@@ -72,7 +79,6 @@ export default defineComponent({
         router.replace({ name: "home" });
       });
     };
-
     return {
       loginFormSchema,
       payload,
@@ -81,5 +87,6 @@ export default defineComponent({
       submit,
     };
   },
+  components: { Loading },
 });
 </script>

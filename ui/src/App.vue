@@ -7,7 +7,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div v-if="$route.name !== 'login'">
+  <div v-if="$route.name !== 'login' && $route.name !== 'register'">
     <Navbar />
   </div>
   <router-view></router-view>

@@ -92,10 +92,10 @@
                 </td>
                 <td>
                   <button type="button" class="btn btn-danger btn-sm">
-                    Delete
+                    <FontAwesomeIcon icon="trash-alt"></FontAwesomeIcon>
                   </button>
                   <button type="button" class="btn btn-primary btn-sm ms-4">
-                    Edit
+                    <FontAwesomeIcon icon="edit"></FontAwesomeIcon>
                   </button>
                 </td>
               </tr>
@@ -108,13 +108,23 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref, watch } from "vue";
+import { defineComponent, computed, ref } from "vue";
 import { useApi } from "../../utils/api";
+
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
 import Loading from "../../components/Loading.vue";
 
+library.add(faTrashAlt, faEdit);
+
 export default defineComponent({
+  components: { FontAwesomeIcon, Loading },
   setup() {
     const { loading, data, get } = useApi("transaction");
+    get();
+
     const date = new Date();
     let firstDay = new Date(date.getFullYear(), date.getMonth(), 2)
       .toISOString()
@@ -122,12 +132,12 @@ export default defineComponent({
     let lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 1)
       .toISOString()
       .split("T")[0];
-    console.log(firstDay, lastDay);
+
     const payload = ref({
       startDate: firstDay,
       endDate: lastDay,
     });
-    get();
+
     const item = computed(() => {
       return data.value.filter((transaction: { date: string }) => {
         return (
@@ -138,6 +148,7 @@ export default defineComponent({
         );
       });
     });
+
     const searchQuery = ref("");
     const searchedItem = computed(() => {
       return item.value.filter((item: { name: string }) => {
@@ -146,6 +157,7 @@ export default defineComponent({
         );
       });
     });
+
     const currencyFormatter = new Intl.NumberFormat("id-ID", {
       style: "currency",
       currency: "IDR",
@@ -159,6 +171,5 @@ export default defineComponent({
       searchedItem,
     };
   },
-  components: { Loading },
 });
 </script>
