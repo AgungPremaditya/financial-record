@@ -7,7 +7,21 @@
         <div class="card">
           <div class="card-header">Detail</div>
           <div class="card-body">
-            <h3 class="card-title mb-4">{{ data.name }}</h3>
+            <div class="row mb-4">
+              <div class="col-9">
+                <h3 class="card-title">{{ data.name }}</h3>
+              </div>
+              <div class="col-3 d-flex justify-content-end">
+                <button type="button" class="btn btn-danger btn-sm px-2">
+                  <FontAwesomeIcon icon="trash-alt" class="me-2" />
+                  Delete
+                </button>
+                <button type="button" class="btn btn-primary btn-sm ms-3 px-2">
+                  <FontAwesomeIcon icon="edit" class="me-2" />
+                  Edit
+                </button>
+              </div>
+            </div>
             <table class="table">
               <tbody>
                 <tr>
@@ -79,6 +93,12 @@ import { useRoute } from "vue-router";
 import { useApi } from "../../utils/api";
 import Loading from "../../components/Loading.vue";
 
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
+library.add(faTrashAlt, faEdit);
+
 export default defineComponent({
   setup() {
     const route = useRoute();
@@ -106,6 +126,6 @@ export default defineComponent({
       data,
     };
   },
-  components: { Loading },
+  components: { FontAwesomeIcon, Loading },
 });
 </script>
