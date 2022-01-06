@@ -159,6 +159,7 @@ export const useApi = (endpoint: string, access_token?: string) => {
     useApi,
     post,
     get,
+    put,
     errorMessage,
     errorDetails,
     errorFields,

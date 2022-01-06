@@ -94,9 +94,16 @@
                   <button type="button" class="btn btn-danger btn-sm">
                     <FontAwesomeIcon icon="trash-alt"></FontAwesomeIcon>
                   </button>
-                  <button type="button" class="btn btn-primary btn-sm ms-4">
-                    <FontAwesomeIcon icon="edit"></FontAwesomeIcon>
-                  </button>
+
+                  <router-link
+                    :to="{
+                      name: 'transactionUpdate',
+                      params: { id: transaction.id },
+                    }"
+                  >
+                    <button type="button" class="btn btn-primary btn-sm ms-4">
+                      <FontAwesomeIcon icon="edit"></FontAwesomeIcon></button
+                  ></router-link>
                 </td>
               </tr>
             </tbody>

@@ -1,7 +1,14 @@
 import { createApp } from "vue";
+
+// Import Bootstrap
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap";
+import "../style/Login.css";
+
 import App from "./App.vue";
 
-import "../style/Login.css";
+// Import Router
+import router from "./router";
 
 // Import Chart
 import {
@@ -24,11 +31,9 @@ Chart.register(
   Tooltip
 );
 
-// Import Router
-import router from "./router";
+const app = createApp(App);
 
-// Import Bootstrap
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap";
+app.use(router);
+app.mount("#app");
 
-createApp(App).use(router).mount("#app");
+// createApp(App).use(router).mount("#app");

@@ -5,47 +5,57 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: import("../views/Home.vue"),
+    component: () => import("../views/Home.vue"),
   },
   {
     path: "/login",
     name: "login",
-    component: import("../views/Login.vue"),
+    component: () => import("../views/Login.vue"),
   },
   {
     path: "/register",
     name: "register",
-    component: import("../views/Register.vue"),
+    component: () => import("../views/Register.vue"),
   },
   {
     path: "/transaction",
     name: "transaction",
-    component: import("../views/Transaction/Index.vue"),
+    component: () => import("../views/Transaction/Index.vue"),
   },
   {
     path: "/transaction/create",
     name: "transactionCreate",
-    component: import("../views/Transaction/Create.vue"),
+    component: () => import("../views/Transaction/Create.vue"),
   },
   {
     path: "/transaction/:id",
     name: "transactionShow",
-    component: import("../views/Transaction/Show.vue"),
+    component: () => import("../views/Transaction/Show.vue"),
   },
   {
     path: "/wallet",
     name: "wallet",
-    component: import("../views/Wallet/Index.vue"),
+    component: () => import("../views/Wallet/Index.vue"),
   },
   {
     path: "/wallet/create",
     name: "walletCreate",
-    component: import("../views/Wallet/Create.vue"),
+    component: () => import("../views/Wallet/Create.vue"),
   },
   {
     path: "/wallet/:id",
     name: "walletShow",
-    component: import("../views/Wallet/Show.vue"),
+    component: () => import("../views/Wallet/Show.vue"),
+  },
+  {
+    path: "/wallet/update/:id",
+    name: "walletUpdate",
+    component: () => import("../views/Wallet/Update.vue"),
+  },
+  {
+    path: "/transaction/update/:id",
+    name: "transactionUpdate",
+    component: () => import("../views/Transaction/Update.vue"),
   },
 ];
 

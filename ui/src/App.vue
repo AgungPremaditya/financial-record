@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent } from "vue";
 import Navbar from "./components/Navbar.vue";
 export default defineComponent({
   components: { Navbar },
@@ -10,7 +10,7 @@ export default defineComponent({
   <div v-if="$route.name !== 'login' && $route.name !== 'register'">
     <Navbar />
   </div>
-  <router-view></router-view>
+  <router-view />
 </template>
 
 <style></style>
