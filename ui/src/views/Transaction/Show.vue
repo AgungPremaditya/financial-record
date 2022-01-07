@@ -12,14 +12,23 @@
                 <h3 class="card-title">{{ data.name }}</h3>
               </div>
               <div class="col-3 d-flex justify-content-end">
-                <button type="button" class="btn btn-danger btn-sm px-2">
-                  <FontAwesomeIcon icon="trash-alt" class="me-2" />
-                  Delete
-                </button>
-                <button type="button" class="btn btn-primary btn-sm ms-3 px-2">
-                  <FontAwesomeIcon icon="edit" class="me-2" />
-                  Edit
-                </button>
+                <div>
+                  <button type="button" class="btn btn-danger btn-sm px-2">
+                    <FontAwesomeIcon icon="trash-alt" class="me-2" />
+                    Delete
+                  </button>
+                </div>
+                <router-link
+                  :to="{ name: 'transactionUpdate', params: { id: data.id } }"
+                >
+                  <button
+                    type="button"
+                    class="btn btn-primary btn-sm ms-3 px-2"
+                  >
+                    <FontAwesomeIcon icon="edit" class="me-2" />
+                    Edit
+                  </button>
+                </router-link>
               </div>
             </div>
             <table class="table">
