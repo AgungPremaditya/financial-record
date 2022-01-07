@@ -1,6 +1,6 @@
 <template>
   <Loading v-if="loading || payload.name === ''"></Loading>
-  <div v-if="!loading" class="row m-0 mt-4">
+  <div v-if="!loading && payload.name !== ''" class="row m-0 mt-4">
     <div class="col-2"></div>
     <div class="col-8">
       <div class="card">
