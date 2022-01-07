@@ -57,7 +57,12 @@
                   {{ currencyFormatter.format(wallet.initValue) }}
                 </td>
                 <td>
-                  <button type="button" class="btn btn-danger btn-sm">
+                  <button
+                    @click="remove(wallet.id)"
+                    type="button"
+                    class="btn btn-danger btn-sm"
+                    :disabled="loadingDel"
+                  >
                     <FontAwesomeIcon icon="trash-alt"></FontAwesomeIcon>
                   </button>
                   <router-link
@@ -88,6 +93,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
+import router from "../../router";
 import Loading from "../../components/Loading.vue";
 
 library.add(faTrashAlt, faEdit);
@@ -108,11 +114,22 @@ export default defineComponent({
       style: "currency",
       currency: "IDR",
     });
+
+    const { loading: loadingDel, del } = useApi("wallet");
+
+    const remove = (id: number) => {
+      del(id).then(() => {
+        window.location.reload();
+      });
+    };
+
     return {
       loading,
       currencyFormatter,
       searchQuery,
       searchedItem,
+      loadingDel,
+      remove,
     };
   },
   components: { FontAwesomeIcon, Loading },

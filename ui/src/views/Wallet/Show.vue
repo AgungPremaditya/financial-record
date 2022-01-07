@@ -13,7 +13,12 @@
               </div>
               <div class="col-3 d-flex justify-content-end">
                 <div>
-                  <button type="button" class="btn btn-danger btn-sm px-2">
+                  <button
+                    @click="remove(data.id)"
+                    type="button"
+                    class="btn btn-danger btn-sm px-2"
+                    :disabled="loadingDel"
+                  >
                     <FontAwesomeIcon icon="trash-alt" class="me-2" />
                     Delete
                   </button>
@@ -75,6 +80,7 @@ import Loading from "../../components/Loading.vue";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import router from "../../router";
 
 library.add(faTrashAlt, faEdit);
 
@@ -87,10 +93,21 @@ export default defineComponent({
     });
     const { loading, data, error, get } = useApi(`wallet/${route.params.id}`);
     get();
+
+    const { loading: loadingDel, del } = useApi("wallet");
+
+    const remove = (id: number) => {
+      del(id).then(() => {
+        router.push({ name: "wallet" });
+      });
+    };
+
     return {
       loading,
       currencyFormatter,
       data,
+      loadingDel,
+      remove,
     };
   },
   components: { FontAwesomeIcon, Loading },

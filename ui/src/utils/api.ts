@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
+import { string } from "yup";
 import { AUTH_KEY, useAuth } from "./auth";
 
 export const useApi = (endpoint: string, access_token?: string) => {
@@ -89,6 +90,24 @@ export const useApi = (endpoint: string, access_token?: string) => {
     }
   };
 
+  // Delete
+  const del = async (id: number) => {
+    loading.value = true;
+    error.value = undefined;
+
+    try {
+      try {
+        const res = await api.delete(`${endpoint}/${id}`);
+        return (data.value = res.data);
+      } catch (e) {
+        error.value = e;
+        throw e;
+      }
+    } finally {
+      return (loading.value = true);
+    }
+  };
+
   // Error Message
   const errorMessage = computed(() => {
     if (error.value) {
@@ -160,6 +179,7 @@ export const useApi = (endpoint: string, access_token?: string) => {
     post,
     get,
     put,
+    del,
     errorMessage,
     errorDetails,
     errorFields,
