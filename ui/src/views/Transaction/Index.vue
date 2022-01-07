@@ -91,7 +91,12 @@
                   {{ currencyFormatter.format(transaction.value) }}
                 </td>
                 <td>
-                  <button type="button" class="btn btn-danger btn-sm">
+                  <button
+                    @click="remove(transaction.id)"
+                    type="button"
+                    class="btn btn-danger btn-sm"
+                    :disabled="loading"
+                  >
                     <FontAwesomeIcon icon="trash-alt"></FontAwesomeIcon>
                   </button>
 
@@ -129,9 +134,10 @@ library.add(faTrashAlt, faEdit);
 export default defineComponent({
   components: { FontAwesomeIcon, Loading },
   setup() {
-    const { loading, data, get } = useApi("transaction");
+    const { loading, data, get, del } = useApi("transaction");
     get();
 
+    // Set start date and end date
     const date = new Date();
     let firstDay = new Date(date.getFullYear(), date.getMonth(), 2)
       .toISOString()
@@ -145,6 +151,7 @@ export default defineComponent({
       endDate: lastDay,
     });
 
+    // Filter by date
     const item = computed(() => {
       return data.value.filter((transaction: { date: string }) => {
         return (
@@ -156,6 +163,7 @@ export default defineComponent({
       });
     });
 
+    // Search
     const searchQuery = ref("");
     const searchedItem = computed(() => {
       return item.value.filter((item: { name: string }) => {
@@ -165,10 +173,19 @@ export default defineComponent({
       });
     });
 
+    // Format Currency
     const currencyFormatter = new Intl.NumberFormat("id-ID", {
       style: "currency",
       currency: "IDR",
     });
+
+    // Remove
+    const remove = (id: number) => {
+      del(id).then(() => {
+        window.location.reload();
+      });
+    };
+
     return {
       loading,
       currencyFormatter,
@@ -176,6 +193,7 @@ export default defineComponent({
       item,
       searchQuery,
       searchedItem,
+      remove,
     };
   },
 });

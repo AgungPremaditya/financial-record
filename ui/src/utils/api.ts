@@ -41,6 +41,7 @@ export const useApi = (endpoint: string, access_token?: string) => {
 
   // Get
   const get = async (
+    id?: number,
     query?: Record<string, any>,
     config?: AxiosRequestConfig
   ) => {
@@ -59,9 +60,15 @@ export const useApi = (endpoint: string, access_token?: string) => {
           .join("&");
     }
 
+    let queryId = "";
+
+    if (id) {
+      queryId = `/${id}`;
+    }
+
     try {
       try {
-        const res = await api.get(endpoint + queryString, config);
+        const res = await api.get(endpoint + queryId + queryString, config);
         return (data.value = res.data);
       } catch (e) {
         error.value = e;

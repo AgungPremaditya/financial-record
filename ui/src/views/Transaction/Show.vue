@@ -13,7 +13,11 @@
               </div>
               <div class="col-3 d-flex justify-content-end">
                 <div>
-                  <button type="button" class="btn btn-danger btn-sm px-2">
+                  <button
+                    @click="remove()"
+                    type="button"
+                    class="btn btn-danger btn-sm px-2"
+                  >
                     <FontAwesomeIcon icon="trash-alt" class="me-2" />
                     Delete
                   </button>
@@ -101,6 +105,7 @@ import { defineComponent } from "vue";
 import { useRoute } from "vue-router";
 import { useApi } from "../../utils/api";
 import Loading from "../../components/Loading.vue";
+import router from "../../router";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
@@ -111,7 +116,18 @@ library.add(faTrashAlt, faEdit);
 export default defineComponent({
   setup() {
     const route = useRoute();
-    console.log(route.params.id);
+
+    const { loading, data, error, del, get } = useApi("transaction");
+    get(parseInt(`${route.params.id}`));
+
+    // Remove
+    const remove = () => {
+      del(parseInt(`${route.params.id}`)).then(() => {
+        router.push({ name: "transaction" });
+      });
+    };
+
+    // Format Date
     const dateFormat = (date: string) => {
       return new Date(date).toLocaleDateString("en-EN", {
         weekday: "long",
@@ -120,18 +136,18 @@ export default defineComponent({
         day: "numeric",
       });
     };
+
+    // Format Currency
     const currencyFormatter = new Intl.NumberFormat("id-ID", {
       style: "currency",
       currency: "IDR",
     });
-    const { loading, data, error, get } = useApi(
-      `transaction/${route.params.id}`
-    );
-    get();
+
     return {
       loading,
       currencyFormatter,
       dateFormat,
+      remove,
       data,
     };
   },

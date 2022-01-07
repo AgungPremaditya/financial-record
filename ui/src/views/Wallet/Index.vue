@@ -61,7 +61,7 @@
                     @click="remove(wallet.id)"
                     type="button"
                     class="btn btn-danger btn-sm"
-                    :disabled="loadingDel"
+                    :disabled="loading"
                   >
                     <FontAwesomeIcon icon="trash-alt"></FontAwesomeIcon>
                   </button>
@@ -100,8 +100,11 @@ library.add(faTrashAlt, faEdit);
 
 export default defineComponent({
   setup() {
-    const { loading, data, get } = useApi("wallet");
+    const { loading, data, get, del } = useApi("wallet");
+
     get();
+
+    // Search
     const searchQuery = ref("");
     const searchedItem = computed(() => {
       return data.value.filter((item: { name: string }) => {
@@ -110,13 +113,14 @@ export default defineComponent({
         );
       });
     });
+
+    // Format Currency
     const currencyFormatter = new Intl.NumberFormat("id-ID", {
       style: "currency",
       currency: "IDR",
     });
 
-    const { loading: loadingDel, del } = useApi("wallet");
-
+    // Remove
     const remove = (id: number) => {
       del(id).then(() => {
         window.location.reload();
@@ -128,7 +132,6 @@ export default defineComponent({
       currencyFormatter,
       searchQuery,
       searchedItem,
-      loadingDel,
       remove,
     };
   },

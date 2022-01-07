@@ -17,7 +17,7 @@
                     @click="remove(data.id)"
                     type="button"
                     class="btn btn-danger btn-sm px-2"
-                    :disabled="loadingDel"
+                    :disabled="loading"
                   >
                     <FontAwesomeIcon icon="trash-alt" class="me-2" />
                     Delete
@@ -87,26 +87,26 @@ library.add(faTrashAlt, faEdit);
 export default defineComponent({
   setup() {
     const route = useRoute();
-    const currencyFormatter = new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-    });
-    const { loading, data, error, get } = useApi(`wallet/${route.params.id}`);
-    get();
+    const { loading, data, error, del, get } = useApi("wallet");
+    get(parseInt(`${route.params.id}`));
 
-    const { loading: loadingDel, del } = useApi("wallet");
-
+    // Remove
     const remove = (id: number) => {
       del(id).then(() => {
         router.push({ name: "wallet" });
       });
     };
 
+    // Format Currency
+    const currencyFormatter = new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+    });
+
     return {
       loading,
       currencyFormatter,
       data,
-      loadingDel,
       remove,
     };
   },
