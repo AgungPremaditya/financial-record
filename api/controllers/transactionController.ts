@@ -11,9 +11,14 @@ export default class TransactionController {
       where: {
         userId: user.id,
       },
-      orderBy: {
-        date: "desc",
-      },
+      orderBy: [
+        {
+          date: "desc",
+        },
+        {
+          id: "desc",
+        },
+      ],
     });
 
     res.status(200).json(transaction);
