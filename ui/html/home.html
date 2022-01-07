@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Money Management</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/42f0e2c97e.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!--sidebar-->
+    <div class="sidebar">
+            <center>
+                    <img src="user.png" class="profil-img" alt="">
+                </center>
+        <div class="menu dashboard" id="dashboard"> <i class="fas fa-home"></i> Dashboard</div>
+        <div class="menu inputkas" id="inputkas"> <i class="fas fa-money-check-alt"></i> Input Kas</div>
+        <div class="logout" id="logout" href="login.html">
+            <a href="./login.html" class="logout"><i class="fas fa-sign-out-alt"></i></a>
+        </div>
+    </div>
+    <!--tutup sidebar-->    
+
+    <!--dashboard-->
+    <div class="main-dashboard" id="main-dashboard">
+        <div class="user-title">
+            <p>Money Journal</p>
+        </div>
+
+         <div class="white-box total-pemasukan">
+            <p>Total Pemasukan</p>
+            <h2>Rp. 200.000</h2>
+        </div>
+
+          <div class="white-box total-pengeluaran">
+                <p>Total Pengeluaran</p>
+                <h2>Rp. 200.000</h2>
+        </div>
+        <!-- <div class="box">
+            <a href="login.html" class="logout"><i class="fas fa-sign-out-alt"></i></a>
+        </div> -->
+
+        <table class="conten-tabel">
+            <thead>
+                <tr>
+                    <th>NO</th>
+                    <th>ID</th>
+                    <th>User</th>
+                    <th>Wallet</th>
+                    <th>Type</th>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Value</th>
+                    <th>Detail</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>45267</td>
+                    <td>hadgkh</td>
+                    <td>586964</td>
+                    <td>pemasukan</td>
+                    <td>27/12/2021</td>
+                    <td>gyidw</td>
+                    <td>Rp.200.000</td>
+                    <td>hiyasgckyhgsa</td>
+                </tr>
+                <tr>
+                        <td>2</td>
+                        <td>45267</td>
+                        <td>hadgkh</td>
+                        <td>586964</td>
+                        <td>pengeluaran</td>
+                        <td>27/12/2021</td>
+                        <td>gyidw</td>
+                        <td>Rp.200.000</td>
+                        <td>hiyasgckyhgsa</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>45267</td>
+                        <td>hadgkh</td>
+                        <td>586964</td>
+                        <td>pemasukan</td>
+                        <td>27/12/2021</td>
+                        <td>gyidw</td>
+                        <td>Rp.200.000</td>
+                        <td>hiyasgckyhgsa</td>
+                    </tr>
+                    <tr>
+                            <td>4</td>
+                            <td>45267</td>
+                            <td>hadgkh</td>
+                            <td>586964</td>
+                            <td>pengeluaran</td>
+                            <td>27/12/2021</td>
+                            <td>gyidw</td>
+                            <td>Rp.200.000</td>
+                            <td>hiyasgckyhgsa</td>
+                        </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--tutup dashboard-->
+
+    <!--input kas-->
+<div class="main-input" id="main-input">
+    <div class="box-input input-kas">
+        <form>
+            <label for="fname">ID</label>
+            <input type="text" id="fname" name="fname" placeholder="1442">
+            <label for="fname">User</label>
+            <input type="text" id="fname" name="fname" placeholder="Made">
+            <label for="fname">Wallet</label>
+            <input type="text" id="fname" name="fname" placeholder="Rp.500.000">
+            <label for="fname">Type</label>
+            <input type="text" id="fname" name="fname" placeholder="Income/Outcome">
+            <label for="fname">Date</label>
+            <input type="text" id="fname" name="fname" placeholder="1/6/2022">
+            <label for="fname">Category</label>
+            <input type="text" id="fname" name="fname" placeholder="Kategori">
+            <label for="fname">Value</label>
+            <input type="text" id="fname" name="fname" placeholder="Rp.200.000">
+            <label for="fname">Detail</label>
+            <input type="text" id="fname" name="fname" placeholder="Gaji bulan desember">
+        </form>
+        <button class="submit-button">Submit</button>
+    </div>
+</div>
+    <!-- tutup input kas-->
+
+    <!--logout-->
+    <!--TUTUP logout-->
+    <script src="script.js"></script>
+</body>
+</html>
