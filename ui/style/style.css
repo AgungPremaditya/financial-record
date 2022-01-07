@@ -1,0 +1,189 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+@font-face{
+    font-family: "Montserrat-Semibold";
+    src:url(font/Montserrat-SemiBold.ttf)
+}
+@font-face{
+    font-family: "Montserrat-Medium";
+    src:url(font/Montserrat-Medium.ttf)
+}
+@font-face{
+    font-family: "Montserrat-Extrabold";
+    src:url(font/Montserrat-ExtraBold.ttf)
+}
+
+
+/*sidebar*/
+.sidebar{
+    position: relative;
+    background:#b361d6;
+    color: white;
+    width: 200px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 15px;
+    font-family: "Montserrat-Semibold";
+}
+.profil-img{
+    width: 120px;
+    height: 120px;
+    border-radius: 55px ;
+    margin-top: 50px;
+}
+.menu {
+    margin: 20px 0px 3px 20px;
+    width: 150px;
+    height: 30px;
+    padding: 10px 0px 0px 30px;
+    background-color: #b361d6;
+    color: white;
+    border-radius: 10px 0px 0px 10px;
+    cursor: pointer;
+}
+
+.dashboard {
+    margin-top: 90px;
+}
+/*tutup sidebar*/
+
+/*dashboard*/
+.main-dashboard{
+    position: relative;
+    margin: -655px 0px 0px 200px;
+    width: 85vw;
+    height: 100vh;
+    overflow: hidden;
+}
+.user-title{
+    position: absolute;
+    font-family: "Montserrat-Medium";
+    color: #707070;
+    margin: 70px 0px 20px 20px;
+}
+.user-title p{
+    font-size: 35px;
+}
+/*white box*/
+.white-box{
+    position: absolute;
+    background: white;
+    padding: 20px;
+    width: 200px;
+    height: 50px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 5px rgb(79,77,77);
+    font-family: "Montserrat-Medium";
+    color: #707070;
+}
+.box {
+    background-color:#b361d6;
+    padding: 20px;
+    height: 10px;
+    width: 10px;
+    margin-top: 18px;
+    margin-right: 90px;
+    border-radius: 5px;
+    float: right;
+}
+.logout{
+    color: white;
+    font-size: 30px;
+    justify-content: center;
+    margin-top: 300px;
+}
+.total-pemasukan{
+    margin: 150px 0px 0px 30px;
+}
+.total-pengeluaran{
+    margin: 150px 0px 0px 350px;
+}
+/*tutup white box*/
+
+/*tabel*/
+.conten-tabel{
+    border-collapse: collapse;
+    margin: 270px 20px;
+    font-size: 0.9em;
+    min-width: 1120px;
+}
+.conten-tabel thead tr{
+    background-color: #b361d6;
+    color: white;
+    text-align: left;
+    font-family: "Montserrat-Medium";
+}
+.conten-tabel th,
+.conten-tabel td{
+    padding: 12px 15px;
+}
+.conten-tabel tbody tr{
+    border-bottom: 1px solid #707070;
+}
+.conten-tabel tbody tr:nth-of-type(even){
+    background-color: #f3f3f3;
+}
+.conten-tabel tbody tr:last-of-type{
+    border-bottom: 2px solid #b361d6;
+}
+/*tutup tabel*/
+/*tutup dashboard*/
+
+/*input kas*/
+.main-input{
+    display: none;
+    position: relative;
+    margin: -655px 0px 0px 200px;
+    width: 85vw;
+    height: 100vh;
+    overflow: hidden;
+}
+.box-input{
+    position: absolute;
+    background: white;
+    padding: 20px;
+    width: 700px;
+    height: 500px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 5px rgb(79,77,77);
+    font-family: "Montserrat-Medium";
+    color: #707070;
+}
+.input-kas{
+    margin: 70px 0px 0px 30px;
+
+}
+input[type="text"]{
+    width: 100%;
+    padding: 5px 5px;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: border-box;
+}
+button{
+    background-color: #b361d6;
+    color: white;
+    width: 70px;
+    height: 30px;
+    margin: 20px 0px 0px 625px;
+    border-radius: 5px;
+    border: none;
+}
+/*tutup input kas*/
+
+/*logout*/
+.main-logout{
+    display: none;
+    position: relative;
+    margin: -655px 0px 0px 200px;
+    width: 85vw;
+    height: 100vh;
+    background-color: #b361d6;
+    overflow: hidden;
+}
+/*tutup logout*/
