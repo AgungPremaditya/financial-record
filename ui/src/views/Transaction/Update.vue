@@ -91,11 +91,7 @@
                 rows="7"
               ></textarea>
             </div>
-            <button
-              type="submit"
-              class="btn btn-primary"
-              :disabled="loading || dataWallet.length === 0"
-            >
+            <button type="submit" class="btn btn-primary" :disabled="loading">
               Submit
             </button>
           </form>
@@ -140,6 +136,7 @@ export default defineComponent({
     const errors = ref();
 
     const {
+      loading,
       data: dataTransaction,
       get: getTransaction,
       put: updateTransaction,
@@ -156,7 +153,7 @@ export default defineComponent({
       payload.value.walletId = dataTransaction.value.walletId;
     });
 
-    const { loading, data: dataWallet, get: getWallet } = useApi("wallet");
+    const { data: dataWallet, get: getWallet } = useApi("wallet");
     getWallet();
 
     const submit = () => {
